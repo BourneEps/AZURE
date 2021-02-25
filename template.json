@@ -1,0 +1,150 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "type": "string"
+        },
+        "virtualNetworkName": {
+            "type": "string"
+        },
+        "resourceGroup": {
+            "type": "string"
+        },
+        "addressSpaces": {
+            "type": "array"
+        },
+        "ipv6Enabled": {
+            "type": "bool"
+        },
+        "subnetCount": {
+            "type": "int"
+        },
+        "subnet0_name": {
+            "type": "string"
+        },
+        "subnet0_addressRange": {
+            "type": "string"
+        },
+        "subnet1_name": {
+            "type": "string"
+        },
+        "subnet1_addressRange": {
+            "type": "string"
+        },
+        "subnet2_name": {
+            "type": "string"
+        },
+        "subnet2_addressRange": {
+            "type": "string"
+        },
+        "subnet3_name": {
+            "type": "string"
+        },
+        "subnet3_addressRange": {
+            "type": "string"
+        },
+        "subnet4_name": {
+            "type": "string"
+        },
+        "subnet4_addressRange": {
+            "type": "string"
+        },
+        "subnet5_name": {
+            "type": "string"
+        },
+        "subnet5_addressRange": {
+            "type": "string"
+        },
+        "subnet6_name": {
+            "type": "string"
+        },
+        "subnet6_addressRange": {
+            "type": "string"
+        },
+        "subnet7_name": {
+            "type": "string"
+        },
+        "subnet7_addressRange": {
+            "type": "string"
+        },
+        "ddosProtectionPlanEnabled": {
+            "type": "bool"
+        },
+        "firewallEnabled": {
+            "type": "bool"
+        },
+        "bastionEnabled": {
+            "type": "bool"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "name": "[parameters('virtualNetworkName')]",
+            "type": "Microsoft.Network/VirtualNetworks",
+            "apiVersion": "2019-09-01",
+            "location": "[parameters('location')]",
+            "dependsOn": [],
+            "tags": {},
+            "properties": {
+                "addressSpace": {
+                    "addressPrefixes": [
+                        "172.16.200.0/21"
+                    ]
+                },
+                "subnets": [
+                    {
+                        "name": "GatewaySubnet",
+                        "properties": {
+                            "addressPrefix": "172.16.200.0/24"
+                        }
+                    },
+                    {
+                        "name": "AzureBastionSubnet",
+                        "properties": {
+                            "addressPrefix": "172.16.201.0/27"
+                        }
+                    },
+                    {
+                        "name": "AADDSSubnet",
+                        "properties": {
+                            "addressPrefix": "172.16.202.0/24"
+                        }
+                    },
+                    {
+                        "name": "Public",
+                        "properties": {
+                            "addressPrefix": "172.16.203.0/24"
+                        }
+                    },
+                    {
+                        "name": "Extranet",
+                        "properties": {
+                            "addressPrefix": "172.16.204.0/24"
+                        }
+                    },
+                    {
+                        "name": "Management",
+                        "properties": {
+                            "addressPrefix": "172.16.205.0/24"
+                        }
+                    },
+                    {
+                        "name": "Intranet",
+                        "properties": {
+                            "addressPrefix": "172.16.206.0/24"
+                        }
+                    },
+                    {
+                        "name": "Replica",
+                        "properties": {
+                            "addressPrefix": "172.16.207.0/24"
+                        }
+                    }
+                ],
+                "enableDdosProtection": "[parameters('ddosProtectionPlanEnabled')]"
+            }
+        }
+    ]
+}
